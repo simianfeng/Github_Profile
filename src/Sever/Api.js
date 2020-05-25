@@ -1,5 +1,5 @@
 import axios from 'axios';
-const url = 'https://covid19.mathdro.id/api';
+const url = 'https://api.github.com/users';
 
 export const fetchData = async (username) => {
   let changeableUrl = url;
@@ -12,6 +12,7 @@ export const fetchData = async (username) => {
     const { data:
       { name,
         company,
+        location,
         created_at,
         updated_at,
         email,
@@ -23,6 +24,7 @@ export const fetchData = async (username) => {
       company,
       created_at,
       updated_at,
+      location,
       email,
       followers,
       bio };
@@ -31,6 +33,17 @@ export const fetchData = async (username) => {
   }
 };
 
+export const getRepoData=(username)=>{
+  return axios.get(`${url}/${username}/repos`)
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
+
+/*
 export const getUsercommits = (username) => {
   return axios.get(`https://github.com/users/${username}/contributions`)
     .then(data => utils.handleUserCommits(data.data))

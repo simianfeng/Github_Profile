@@ -1,25 +1,29 @@
 import React from 'react';
 import './App.css';
 import UserInput from './pages/Userinput';
-import { fetchData } from './Sever/Api';
+import { fetchData,getRepoData } from './Sever/Api';
 
 class App extends React.Component {
   state = {
     data: {},
+    repos:{}
   }
 
   async componentDidMount() {
-    const data = await fetchData();
+    const data = await fetchData ('leij11');
+    const repos=await getRepoData('leij11');
 
-    this.setState({ data });
+    this.setState({ data,repos });
   }
 
 
   render() {
-    const { data } = this.state;
+    const { data,repos } = this.state;
 
     return (
-        <data />
+      console.log(data),
+      console.log(repos),
+        <UserInput />
     );
   }
 }
