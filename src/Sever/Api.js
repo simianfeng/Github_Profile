@@ -4,7 +4,7 @@ const url = 'https://covid19.mathdro.id/api';
 export const fetchData = async (username) => {
   let changeableUrl = url;
 
-  if (country) {
+  if (username) {
     changeableUrl = `${url}/${username}`;
   }
 
@@ -30,6 +30,12 @@ export const fetchData = async (username) => {
     return error;
   }
 };
+
+export const getUsercommits = (username) => {
+  return axios.get(`https://github.com/users/${username}/contributions`)
+    .then(data => utils.handleUserCommits(data.data))
+}
+
 // Call function passing in 'facebook' as GitHub username
 /*
 requestUserRepos('leij11');
