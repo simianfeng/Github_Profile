@@ -1,35 +1,28 @@
-import React, { Component} from "react";
+import React, { useState } from "react";
 import './UserInput.css';
 
-class Userinput extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {value: ''};
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this)
-  }
-
-  handleChange(event) {
-    this.setState({value: event.target.value});
-  }
-
-  handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
+const Userinput  = props =>{
+  const [enteredText, setEnteredText] = useState('');
+  const addHandler = event => {
     event.preventDefault();
-  }
+    const newGoal = {
+      id: Math.random().toString(),
+      text: enteredText
+    };
+    setEnteredText('');
+    props.onhandlechange(newGoal);
+  };
 
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit} className='forms'>
-        <label>
-          Github Username:
-          <input type="text" value={this.state.value} onChange={this.handleChange} required/>
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
-    );
-  }
+const textChangeHandler = event => {
+    setEnteredText(event.target.value);
+  };
+
+  return (
+  <form className='forms' onSubmit={addHandler}>
+          <label className='label'>Enter github user name: </label>
+          <input className='input' type="text" value={enteredText} onChange={textChangeHandler} required />
+          <button className='submit' type="submit"> Submit</button>
+    </form>);
 }
 
 export default Userinput;

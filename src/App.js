@@ -1,31 +1,19 @@
-import React from 'react';
+import React, { useState } from "react";
 import './App.css';
 import UserInput from './pages/Userinput';
 import { fetchData,getRepoData } from './Sever/Api';
-
-class App extends React.Component {
-  state = {
-    data: {},
-    repos:{}
-  }
-
-  async componentDidMount() {
-    const data = await fetchData ('leij11');
-    const repos=await getRepoData('leij11');
-
-    this.setState({ data,repos });
-  }
-
-
-  render() {
-    const { data,repos } = this.state;
+const user= 'leij11';
+const App =()=> {
+  const [username, setUsername] = useState('leij11');
+  // setCourseGoals(courseGoals.concat(newGoal));
+  const addHandler = newGoal =>
+      setUsername(newGoal);
 
     return (
-      console.log(data),
-      console.log(repos),
-        <UserInput />
+       <div className='style'>
+         <UserInput onhandlechange={addHandler} />
+      </div>
     );
-  }
 }
 
 export default App;
