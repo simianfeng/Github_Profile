@@ -1,4 +1,5 @@
 import React, { Component} from "react";
+import './UserInput.css';
 
 class Userinput extends Component {
   constructor(props) {
@@ -6,7 +7,7 @@ class Userinput extends Component {
     this.state = {value: ''};
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange(event) {
@@ -20,10 +21,10 @@ class Userinput extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className='forms'>
         <label>
-          Github Username: 
-          <input type="text" value={this.state.value} onChange={this.handleChange} />
+          Github Username:
+          <input type="text" value={this.state.value} onChange={this.handleChange} required/>
         </label>
         <input type="submit" value="Submit" />
       </form>
