@@ -1,3 +1,8 @@
-import Chart from 'chart.js';
+import React, { useState, useEffect } from 'react';
+import { Bar } from 'react-chartjs';
 
-var ctx = document.getElementById('chart');
+var BarChart = new Chart(ctx, {
+    type: 'bar',
+    data: data,
+    options: options
+});
