@@ -11,6 +11,7 @@ const Main = props => {
     };
     const fetchRepo = async () => {
       setRepoData(await getRepoData('leij11'));
+
     };
     fetchUser();
     fetchRepo();
@@ -18,7 +19,7 @@ const Main = props => {
 
   return (
     console.log(userData),
-    console.log(repoData),
+    console.log(repoData.data),
     <div>
       mainpage
     </div>

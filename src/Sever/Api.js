@@ -40,30 +40,9 @@ export const getRepoData=async (username)=>{
     changeableUrl = `${url}/${username}/repos`;
   }
   try {
-    const { data:
-      [ repo ]
-      } = await axios.get(changeableUrl);
-
-    return [repo];
+    return await axios.get(changeableUrl);
   }
    catch (error) {
     return error;
   }
 }
-
-/*
-export const getUsercommits = (username) => {
-  return axios.get(`https://github.com/users/${username}/contributions`)
-    .then(data => utils.handleUserCommits(data.data))
-}
-
-// Call function passing in 'facebook' as GitHub username
-/*
-requestUserRepos('leij11');
-module.exports = {
-  checkUserIsStarringRepo,
-  getUserData,
-  getRateLimit
-  requestUserRepos
-}
-*/
