@@ -1,7 +1,7 @@
 import axios from 'axios';
 const url = 'https://api.github.com/users';
 
-export const fetchData = async (username) => {
+export const getData = async (username) => {
   let changeableUrl = url;
 
   if (username) {
@@ -33,14 +33,22 @@ export const fetchData = async (username) => {
   }
 };
 
-export const getRepoData=(username)=>{
-  return axios.get(`${url}/${username}/repos`)
-  .then(function (response) {
-    console.log(response);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+export const getRepoData=async (username)=>{
+  let changeableUrl = url;
+
+  if (username) {
+    changeableUrl = `${url}/${username}/repos`;
+  }
+  try {
+    const { data:
+      [ repo ]
+      } = await axios.get(changeableUrl);
+
+    return [repo];
+  }
+   catch (error) {
+    return error;
+  }
 }
 
 /*
