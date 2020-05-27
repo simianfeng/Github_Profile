@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Bar } from 'react-chartjs';
+import React, { Component, useState, useEffect } from 'react';
+import {Bar, Line, Pie} from 'chart.js';
 
-var BarChart = new Chart(ctx, {
-    type: 'bar',
-    data: data,
-    options: options
-});
+const Barchart = ()=>
+{
+return(
+  <div>bar</div>
+  )
+}
+export default Barchart;

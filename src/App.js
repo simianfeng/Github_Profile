@@ -12,7 +12,8 @@ const App =()=> {
 
     return (
        <div className='style'>
-         <UserInput onhandlechange={addHandler} />,
+         <UserInput onhandlechange={addHandler} />
+
          <Main/>
       </div>
     );
