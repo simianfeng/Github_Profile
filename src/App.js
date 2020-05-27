@@ -11,8 +11,8 @@ const App =()=> {
       setUsername(newGoal);
 
     return (
-       <div className='style'>
-         <UserInput onhandlechange={addHandler} />
+       <div >
+        // <UserInput onhandlechange={addHandler} />
 
          <Main/>
       </div>

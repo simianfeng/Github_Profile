@@ -2,24 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { getData,getRepoData,getLanguageData } from '../Sever/Api';
 import Piechart from '../components/Piechart'
 import Barchart from '../components/Barchart'
+import { Line, Bar } from 'react-chartjs-2';
 
-const data = {
-    datasets: [{
-        data: [10, 20, 30]
-    }],
 
-    // These labels appear in the legend and in the tooltips when hovering different arcs
-    labels: [
-        'Red',
-        'Yellow',
-        'Blue'
-    ]
-};
 const Main = props => {
   const [userData, setUserData] = useState([]);
   const [repoData, setRepoData] = useState([]);
   const [chartData, setChartData] = useState({});
-  const [languagesArr, setlanguagesArr] = useState({});
+  const [languagesArr, setlanguagesArr] = useState([]);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -38,12 +28,31 @@ const Main = props => {
     fetchlanguages();
   }, []);
 
+  const barChart = (
+
+    <Bar
+            data={{
+              labels: languagesArr.map(({language }) => language),
+              datasets: [{
+                data: languagesArr.map(({stars }) => stars),
+                label: 'language',
+                borderColor: '#3333ff',
+                fill: true,
+              }
+              ],
+            }}
+          />
+
+);
+
+
+
   return (
-    console.log(repoData),
+    //console.log(repoData),
     console.log(languagesArr),
-    <React.Fragment>
-    <Barchart />
-    </React.Fragment>
+    <div>
+        {barChart }
+    </div>
   );
 }
 
