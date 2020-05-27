@@ -3,28 +3,22 @@ import './UserInput.css';
 import { useHistory } from "react-router-dom";
 
 const Userinput  = props =>{
-  const [enteredText, setEnteredText] = useState('');
-  const addHandler = event => {
-
-    event.preventDefault();
-    const newGoal = {
-      id: Math.random().toString(),
-      text: enteredText
-    };
-    setEnteredText('');
-    props.onhandlechange(newGoal);
-  };
-
-const textChangeHandler = event => {
-    setEnteredText(event.target.value);
-  };
+  const [username, setUsername] = useState('leij11');
+  const handleChange = e => setUsername(e.target.value);
+  let history = useHistory();
 
   return (
-  <form className='forms' onSubmit={addHandler}>
-          <label className='label'>Enter github user name: </label>
-          <input className='input' type="text" value={enteredText} onChange={textChangeHandler} required />
-          <button className='submit' type="submit"> Submit</button>
-    </form>);
+    <form onSubmit={e => {
+        e.preventDefault();
+        history.push(
+          {
+            pathname: '/main',
+            query: { id: username },
+          });
+      }}>
+      <label htmlFor="username">Enter your github name!</label>
+      <input name="username" type="text" onChange={handleChange} />
+      </form>)
 }
 
 export default Userinput;

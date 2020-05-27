@@ -13,17 +13,10 @@ import Main from './pages/Main'
 const user= 'leij11';
 
 const App =()=> {
-  const [username, setUsername] = useState(user);
-  const addHandler = newGoal =>
-      setUsername(newGoal);
-
-
-
     return (
        <Router>
          <Route path="/" >
-           <UserInput onhandlechange={addHandler} />
-           
+           <UserInput  />
            </Route>
          <Route path="/Main" exact>
            <Main/>
