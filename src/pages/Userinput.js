@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import './UserInput.css';
+import { useHistory } from "react-router-dom";
 
 const Userinput  = props =>{
   const [enteredText, setEnteredText] = useState('');
   const addHandler = event => {
+
     event.preventDefault();
     const newGoal = {
       id: Math.random().toString(),

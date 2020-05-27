@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { getData,getRepoData,getLanguageData } from '../Sever/Api';
+import { getData,getRepoData,getLanguageData,getUsercommits } from '../Sever/Api';
 import Piechart from '../components/Piechart'
 import Barchart from '../components/Barchart'
-import { Line, Bar } from 'react-chartjs-2';
+import { Line, Bar,Doughnut } from 'react-chartjs-2';
 
 
-const Main = props => {
+const Main = (username) => {
   const [userData, setUserData] = useState([]);
   const [repoData, setRepoData] = useState([]);
-  const [chartData, setChartData] = useState({});
+  const [commitData, setcommitData] = useState({});
   const [languagesArr, setlanguagesArr] = useState([]);
 
   useEffect(() => {
@@ -23,13 +23,19 @@ const Main = props => {
       setlanguagesArr(await getLanguageData('leij11'));
     };
 
+/*
+    const fetchcommit = async () => {
+      setcommitData(await getUsercommits());
+    };
+    */
+
     fetchUser();
     fetchRepo();
+    //fetchcommit();
     fetchlanguages();
   }, []);
 
   const barChart = (
-
     <Bar
             data={{
               labels: languagesArr.map(({language }) => language),
@@ -43,15 +49,31 @@ const Main = props => {
             }}
           />
 
-);
+      );
 
+      const doughnutChart = (
+        <Doughnut
+                data={{
+                  labels: languagesArr.map(({language }) => language),
+                  datasets: [{
+                    data: languagesArr.map(({count }) => count),
+                    label: 'language',
+                    borderColor: '#3333ff',
+                    fill: true,
+                  }
+                  ],
+                }}
+              />
 
+          );
 
   return (
     //console.log(repoData),
+    console.log(commitData),
     console.log(languagesArr),
     <div>
         {barChart }
+        {doughnutChart }
     </div>
   );
 }

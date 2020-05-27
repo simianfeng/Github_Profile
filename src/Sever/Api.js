@@ -86,3 +86,8 @@ export const getLanguageData=async (username)=>{
   }
   return languagesArr
 }
+
+export const getUsercommits = (username) => {
+  return axios.get(`https://github.com/users/leij11/repos`)
+
+}
