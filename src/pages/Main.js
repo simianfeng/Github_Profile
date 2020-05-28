@@ -3,7 +3,7 @@ import { getData,getRepoData,getLanguageData,getUsercommits } from '../Sever/Api
 import { Line, Bar,Doughnut } from 'react-chartjs-2';
 import { useParams } from 'react-router-dom';
 import Chart from '../components/Chart'
-
+import User from '../components/User'
 
 const Main = props => {
   /*
@@ -56,7 +56,9 @@ const Main = props => {
 */
   return (
     <div>
+      <User />
       <Chart />
+
     </div>
   );
 }
