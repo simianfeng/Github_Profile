@@ -17,7 +17,8 @@ export const getData = async (username) => {
         updated_at,
         email,
         followers,
-        bio }
+        bio,
+        avatar_url }
       } = await axios.get(changeableUrl);
 
     return {name,
@@ -27,7 +28,8 @@ export const getData = async (username) => {
       location,
       email,
       followers,
-      bio };
+      bio,
+      avatar_url };
   } catch (error) {
     return error;
   }
