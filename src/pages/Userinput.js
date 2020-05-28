@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
+import { Container } from 'react-bootstrap';
+
 import './UserInput.css';
 import { useHistory } from "react-router-dom";
 
@@ -8,13 +10,15 @@ const Userinput  = props =>{
   let history = useHistory();
 
   return (
-    <form onSubmit={e => {
+    <Container className='container'>
+    <form className='forms' onSubmit={e => {
         e.preventDefault();
         history.push('/'+username+'/profile');
       }}>
-      <label htmlFor="username">Enter your github name!</label>
-      <input name="username" type="text" onChange={handleChange} />
-      </form>)
+      <label className='label' htmlFor="username">Enter your github name!</label>
+      <input className='input' name="username" type="text" onChange={handleChange} />
+      </form>
+    </Container>)
 }
 
 export default Userinput;
