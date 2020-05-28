@@ -10,11 +10,7 @@ const Userinput  = props =>{
   return (
     <form onSubmit={e => {
         e.preventDefault();
-        history.push(
-          {
-            pathname: '/main',
-            query: { id: username },
-          });
+        history.push('/'+username+'/profile');
       }}>
       <label htmlFor="username">Enter your github name!</label>
       <input name="username" type="text" onChange={handleChange} />

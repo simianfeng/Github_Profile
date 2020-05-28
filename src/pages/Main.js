@@ -3,9 +3,11 @@ import { getData,getRepoData,getLanguageData,getUsercommits } from '../Sever/Api
 import Piechart from '../components/Piechart'
 import Barchart from '../components/Barchart'
 import { Line, Bar,Doughnut } from 'react-chartjs-2';
+import { useParams } from "react-router-dom";
 
 
-const Main = (username) => {
+const Main = props => {
+  const username=useParams().username;
   const [userData, setUserData] = useState([]);
   const [repoData, setRepoData] = useState([]);
   const [commitData, setcommitData] = useState({});
@@ -13,14 +15,14 @@ const Main = (username) => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      setUserData(await getData('leij11'));
+      setUserData(await getData(username));
     };
     const fetchRepo = async () => {
-      setRepoData(await getRepoData('leij11'));
+      setRepoData(await getRepoData(username));
     };
 
     const fetchlanguages = async () => {
-      setlanguagesArr(await getLanguageData('leij11'));
+      setlanguagesArr(await getLanguageData(username));
     };
 
 /*
@@ -43,6 +45,7 @@ const Main = (username) => {
                 data: languagesArr.map(({stars }) => stars),
                 label: 'language',
                 borderColor: '#3333ff',
+                backgroundColor: 'rgba(255, 0, 0, 0.5)',
                 fill: true,
               }
               ],
@@ -59,6 +62,7 @@ const Main = (username) => {
                     data: languagesArr.map(({count }) => count),
                     label: 'language',
                     borderColor: '#3333ff',
+                    backgroundColor: ['rgba(0, 0, 255, 0.5)', 'rgba(0, 255, 0, 0.5)', 'rgba(255, 0, 0, 0.5)'],
                     fill: true,
                   }
                   ],
@@ -68,10 +72,11 @@ const Main = (username) => {
           );
 
   return (
-    //console.log(repoData),
-    console.log(commitData),
-    console.log(languagesArr),
+    console.log(userData),
+  //  console.log(commitData),
+  //  console.log(languagesArr),
     <div>
+        {userData.name }
         {barChart }
         {doughnutChart }
     </div>

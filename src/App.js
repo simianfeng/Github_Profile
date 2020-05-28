@@ -15,12 +15,11 @@ const user= 'leij11';
 const App =()=> {
     return (
        <Router>
-         <Route path="/" >
-           <UserInput  />
-           </Route>
-         <Route path="/Main" exact>
-           <Main/>
-           </Route>
+         <Switch>
+               <Route path='/main' component={Main} />
+               <Route path='/:username/profile' component={Main} />
+               <Route path='/' component={UserInput} />
+              </Switch>
       </Router>
     );
 }
