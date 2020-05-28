@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { getData,getRepoData,getLanguageData,getUsercommits } from '../Sever/Api';
 import { Line, Bar,Doughnut } from 'react-chartjs-2';
-import { useParams } from 'react-router-dom';
-import Chart from '../components/Chart'
+import { useParams } from "react-router-dom";
 
-
-const Main = props => {
-  /*
+const Chart = () => {
   const username=useParams().username;
   const [userData, setUserData] = useState([]);
   const [repoData, setRepoData] = useState([]);
@@ -53,12 +50,14 @@ const Main = props => {
               backgroundColor: ['rgba(0, 0, 255, 0.5)', 'rgba(0, 255, 0, 0.5)', 'rgba(255, 0, 0, 0.5)'],
               fill: true}],}}/>
           );
-*/
-  return (
-    <div>
-      <Chart />
-    </div>
-  );
+
+          return (
+            <div>
+                {barChart}
+                {doughnutChart }
+                
+            </div>
+          );
 }
 
-export default Main;
+export default Chart;
