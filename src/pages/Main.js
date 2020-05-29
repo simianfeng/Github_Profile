@@ -58,7 +58,6 @@ const Main = props => {
     <div>
       <User />
       <Chart />
-
     </div>
   );
 }
