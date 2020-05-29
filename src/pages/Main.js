@@ -4,7 +4,7 @@ import { Line, Bar,Doughnut } from 'react-chartjs-2';
 import { useParams } from 'react-router-dom';
 import Chart from '../components/Chart'
 import User from '../components/User'
-
+import './Main.css'
 const Main = props => {
   /*
   const username=useParams().username;
@@ -55,7 +55,7 @@ const Main = props => {
           );
 */
   return (
-    <div>
+    <div className='style'>
       <User />
       <Chart />
     </div>

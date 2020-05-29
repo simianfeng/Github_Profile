@@ -17,26 +17,42 @@ const Chart = () => {
 
   const barChart = (
     <Bar
+      width={120}
+      height={40}
       data={{
         labels: languagesArr.map(({language }) => language),
         datasets: [{
           data: languagesArr.map(({stars }) => stars),
-          label: 'language',
-          borderColor: '#3333ff',
-          backgroundColor: ['rgba(0, 0, 255, 0.5)', 'rgba(0, 255, 0, 0.5)', 'rgba(255, 0, 0, 0.5)'],
-          fill: true}],}}/>
+          label: 'Star',
+          borderColor: 'Gray',
+          backgroundColor: ['LightSteelBlue', 'PeachPuff','LemonChiffon','PowderBlue', 'LavenderBlush','Pink','LightGray','SandyBrown','PaleGoldenRod','LightCoral','PaleVioletRed'],
+          fill: true}],}}
+          options={{
+              legend: { display: true },
+              title: { display: true, text: `Top Star Per Language` },
+            }}
+            />
+
       );
 
       const doughnutChart = (
         <Doughnut
+          width={120}
+          height={40}
           data={{
             labels: languagesArr.map(({language }) => language),
             datasets: [{
               data: languagesArr.map(({count }) => count),
               label: 'language',
-              borderColor: '#3333ff',
-              backgroundColor: ['rgba(0, 0, 255, 0.5)', 'rgba(0, 255, 0, 0.5)', 'rgba(255, 0, 0, 0.5)'],
-              fill: true}],}}/>
+              borderColor: 'Gray',
+              backgroundColor: ['LightSteelBlue', 'PeachPuff','LemonChiffon','PowderBlue', 'LavenderBlush','Pink','LightGray','SandyBrown','PaleGoldenRod','LightCoral','PaleVioletRed'],
+              fill: true}],}}
+              options={{
+                  legend: { display: true },
+                  title: { display: true, text: `Number of Repo Per Language` },
+                }}
+
+              />
           );
 
           return (
