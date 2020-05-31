@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getData,getRepoData,getLanguageData,getUsercommits } from '../Sever/Api';
+import { getData,getRepoData,getLanguageData,getCommits } from '../Sever/Api';
 import { useParams } from 'react-router-dom';
 import {  Icon, Image} from 'semantic-ui-react';
 import './User.css';
@@ -12,18 +12,18 @@ const User = () => {
     const fetchUser = async () => {
       setUserData(await getData(username));
     };
-
+/*
     const fetchc = async () => {
-      setUserData(await getUsercommits(username));
+      setUserData(await getCommits(username));
     };
-
+*/
     fetchUser();
-    fetchc();
+
   }, []);
 
   return(
       console.log(userData),
-      console.log(userc),
+      
       <div className='profile'>
         {userData.avatar_url && (
           <div className='avatar'>
