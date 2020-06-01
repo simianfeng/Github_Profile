@@ -12,18 +12,14 @@ const User = () => {
     const fetchUser = async () => {
       setUserData(await getData(username));
     };
-/*
-    const fetchc = async () => {
-      setUserData(await getCommits(username));
-    };
-*/
-    fetchUser();
 
+
+    fetchUser();
   }, []);
 
   return(
       console.log(userData),
-      
+
       <div className='profile'>
         {userData.avatar_url && (
           <div className='avatar'>

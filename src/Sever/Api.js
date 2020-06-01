@@ -101,6 +101,28 @@ export const getLanguageData=async (username)=>{
 }
 
 export const getCommit=async (username)=>{
+  const  {data}=(await axios.get(`${url}/${username}/repos`));
+  const commits_info=[]
+  const commits_date=[]
+  data.forEach(repo => {
+    commits_info.push(`https://api.github.com/repos/${username}/${repo.name}/commits`)
+})
+
+  for (let i in commits_info) {
+    const { data }=await axios.get(i);
+    data.forEach(item => {
+      if(item.committer.login===username)
+      {
+        commitDate.push(item.committer.date)
+      }
+    })
+  }
+
+
+return commits_Date
+}
+/*
+export const getCommit=async (username)=>{
   let changeableUrl = url;
   var commitDate=[];
   if (username) {
@@ -131,3 +153,4 @@ export const getCommit=async (username)=>{
     return error;
   }
 }
+*/
