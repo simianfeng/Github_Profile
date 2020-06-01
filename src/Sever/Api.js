@@ -1,4 +1,5 @@
 import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 const url = 'https://api.github.com/users';
 
 export const getData = async (username) => {
@@ -70,8 +71,6 @@ export const getLanguageData=async (username)=>{
   const languages = {}
   const languageStars = {}
   const languageForks={}
-  var totalstar=0
-  var totalfork=0
   data.forEach(item => {
     if (item.language) {
       languages[item.language] ? languages[item.language] += 1 : languages[item.language] = 1
@@ -83,8 +82,6 @@ export const getLanguageData=async (username)=>{
       languageStars['Unknown']  ? languages['Unknown'] += item.stargazers_count|| 0: languageStars['Unknown'] += item.stargazers_count||0
       languageForks['Unknown'] ? languageForks['Unknown'] += item.forks|| 0 :languageForks['Unknown'] =item.forks|| 0
     }
-    totalstar+=item.stargazers_count
-    totalfork+=item.forks
   })
   const languagesArr = []
   for (let i in languages) {
@@ -99,28 +96,90 @@ export const getLanguageData=async (username)=>{
   }
   return languagesArr
 }
+export const getSum=async (username)=>{
+  const { data }=await axios.get(`${url}/${username}/repos`);
+  var totalstar=0
+  var totalfork=0
+  data.forEach(item => {
+    totalstar+=item.stargazers_count|| 0
+    totalfork+=item.tem.forks|| 0
+  })
+  return {totalstar,totalfork}
+}
 
+export const getTop=async (username)=>{
+}
+/*
 export const getCommit=async (username)=>{
   const  {data}=(await axios.get(`${url}/${username}/repos`));
   const commits_info=[]
   const commits_date=[]
+  //const [commit, setcommit] = useState([]);
+  const urls=[]
   data.forEach(repo => {
     commits_info.push(`https://api.github.com/repos/${username}/${repo.name}/commits`)
 })
-
-  for (let i in commits_info) {
-    const { data }=await axios.get(i);
-    data.forEach(item => {
-      if(item.committer.login===username)
-      {
-        commitDate.push(item.committer.date)
-      }
-    })
+  //console.log(commits_info);
+  commits_info.forEach(i=>{
+    //console.log(i);
+    urls.push(axios.get(i));
+  })
+  Promise.all(urls)
+  .then(
+    urls.forEach(item => {
+      console.log(JSON.parse(item));
   }
+)
+)
+
+  fetch(urls)
+      .then(response => response.json())
+      .then(json => console.log(json));
 
 
-return commits_Date
+  fetch(urls)
+  .then(response => response.json())
+ .then (
+   json =>
+   (useEffect(() => {
+     const fetchcommit = async () => {
+       setcommit(commit);
+     };
+     fetchcommit();
+   }, []))
+  )
+
+  const resArr = commit.map((r, i)=> {
+      return (
+        {r.commit.author.date}
+      )
+      }
+
+
+  axios.all(urls)
+  .then(
+    urls.forEach(item => {
+      console.log(item);
+    }
+  )
+)
+
+    Promise.all(urls)
+    .then(
+
+      urls.forEach(item => {
+        console.log(item);
+      if(item.commit.author.login===username)
+      {
+        commits_date.push(item.commit.author.date)
+      }
+    }
+  )
+  )
+
+return commits_info
 }
+
 /*
 export const getCommit=async (username)=>{
   let changeableUrl = url;

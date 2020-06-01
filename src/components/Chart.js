@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getLanguageData ,fetchLastCommit,getCommit} from '../Sever/Api';
+import { getLanguageData } from '../Sever/Api';
 import { Line, Bar,Doughnut, Divider, Grid, Image, Segment } from 'react-chartjs-2';
 import { useParams } from "react-router-dom";
 
@@ -7,26 +7,36 @@ const Chart = () => {
   const username=useParams().username;
   const [languagesArr, setlanguagesArr] = useState([]);
   const [l, setl] = useState({});
+  const size=400
   useEffect(() => {
     const fetchlanguages = async () => {
       setlanguagesArr(await getLanguageData(username));
     };
+    /*
     const fetchl = async () => {
       setl(await getCommit(username));
     };
-
+*/
     fetchlanguages();
-    fetchl()
+
   }, []);
 
+  const LIMIT = 5;
+  const sortProperty = 'stars';
+  languagesArr.sort((a, b) => {
+        if (a.count > b.count) return -1
+        else if (a.count < b.count) return 1
+        return 0
+      })
+console.log(languagesArr)
   const barChart = (
     <Bar
-      width={120}
-      height={40}
+      width={size}
+      height={size}
       data={{
         labels: languagesArr.map(({language }) => language),
         datasets: [{
-          data: languagesArr.map(({stars }) => stars),
+          data: languagesArr.map(({count}) => count),
           label: 'Star',
           borderColor: 'Gray',
           hoverBackgroundColor: 'white',
@@ -42,14 +52,14 @@ const Chart = () => {
 
       );
 
-      const doughnutChart = (
+      const doughnutChart_star = (
         <Doughnut
-          width={120}
-          height={40}
+          width={size}
+          height={size}
           data={{
             labels: languagesArr.map(({language }) => language),
             datasets: [{
-              data: languagesArr.map(({count }) => count),
+              data: languagesArr.map(({stars }) => stars),
               label: 'language',
               borderColor: 'Gray',
               hoverBackgroundColor: 'Tomato',
@@ -58,16 +68,16 @@ const Chart = () => {
               fill: true}],}}
               options={{
                   legend: { display: true },
-                  title: { display: true, text: `Number of Repo Per Language` },
+                  title: { display: true, text: `Stars Count Per Language` },
                 }}
 
               />
           );
 
-          const doughnutChart2 = (
+          const doughnutChart_fork = (
             <Doughnut
-              width={120}
-              height={40}
+              width={size}
+              height={size}
               data={{
                 labels: languagesArr.map(({language }) => language),
                 datasets: [{
@@ -80,7 +90,7 @@ const Chart = () => {
                   fill: true}],}}
                   options={{
                       legend: { display: true },
-                      title: { display: true, text: `Number of Repo Per Language` },
+                      title: { display: true, text: `Forks Count Per Language` },
                     }}
 
                   />
@@ -90,7 +100,8 @@ const Chart = () => {
             console.log(languagesArr),
             <div>
                 {barChart}
-                {doughnutChart }
+                {doughnutChart_star }
+                {doughnutChart_fork }
 
             </div>
 
