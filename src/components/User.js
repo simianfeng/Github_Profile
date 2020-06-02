@@ -1,24 +1,50 @@
 import React, { useState, useEffect } from 'react';
-import { getData,getRepoData,getLanguageData,getCommits } from '../Sever/Api';
+import { getData,getRepoData,getLanguageData,getSum } from '../Sever/Api';
 import { useParams } from 'react-router-dom';
-import {  Icon, Image} from 'semantic-ui-react';
+import {  Icon, Image,Card} from 'semantic-ui-react';
 import './User.css';
 
 const User = () => {
   const username=useParams().username;
   const [userData, setUserData] = useState([]);
-  const [userc, setc] = useState([]);
+  const [userSum, setSum] = useState([]);
   useEffect(() => {
     const fetchUser = async () => {
       setUserData(await getData(username));
     };
-
+    const fetchSum = async () => {
+      setSum(await getSum(username));
+    };
 
     fetchUser();
+    fetchSum();
   }, []);
 
+  const items = [
+  {
+    header: 'Repos',
+    description:
+      userData.public_repos
+  },
+  {
+    header: 'Followers',
+    description:
+      userData.followers
+  },
+  {
+    header: 'Stars',
+    description:
+      userSum.totalstar
+  },
+  {
+    header: 'Forks',
+    description:
+      userSum.totalfork
+  }
+]
+
   return(
-      console.log(userData),
+      //console.log(userData),
 
       <div className='profile'>
         {userData.avatar_url && (
@@ -60,24 +86,8 @@ const User = () => {
           </h3>
         }
 
-        {userData.created_at &&
-          <h3>
-          <i aria-hidden="true" class="calendar alternate outline icon"></i>
-          {new Date(userData.created_at).toLocaleDateString('en-US', {
-              month: 'long',
-              day: 'numeric',
-              year: 'numeric',
-            })}
-
-          </h3>
-        }
-        </div>
-        {userData.email &&
-          <h3>
-          <i aria-hidden="true" class="mail icon"></i>
-            {userData.email}
-          </h3>
-        }
+</div>
+      <Card.Group centered  items={items}  />
       </div>
   );
 }

@@ -1,27 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { getLanguageData } from '../Sever/Api';
-import { Line, Bar,Doughnut, Divider, Grid, Image, Segment } from 'react-chartjs-2';
+import { Line, Bar,Doughnut, Divider, Image, Segment } from 'react-chartjs-2';
 import { useParams } from "react-router-dom";
-
+import { Grid,Card} from 'semantic-ui-react';
 const Chart = () => {
   const username=useParams().username;
   const [languagesArr, setlanguagesArr] = useState([]);
   const [l, setl] = useState({});
-  const size=400
+  const width=150
+  const height=350
+  const size=120
   useEffect(() => {
     const fetchlanguages = async () => {
       setlanguagesArr(await getLanguageData(username));
     };
-    /*
-    const fetchl = async () => {
-      setl(await getCommit(username));
-    };
-*/
     fetchlanguages();
 
   }, []);
 
-  const LIMIT = 5;
   const sortProperty = 'stars';
   languagesArr.sort((a, b) => {
         if (a.count > b.count) return -1
@@ -31,8 +27,8 @@ const Chart = () => {
 console.log(languagesArr)
   const barChart = (
     <Bar
-      width={size}
-      height={size}
+      width={width}
+      height={height}
       data={{
         labels: languagesArr.map(({language }) => language),
         datasets: [{
@@ -43,19 +39,22 @@ console.log(languagesArr)
           hoverBorderColor: 'Gray',
           borderWidth: 1,
           backgroundColor: ['LightSteelBlue', 'PeachPuff','LemonChiffon','PowderBlue', 'LavenderBlush','Pink','LightGray','SandyBrown','PaleGoldenRod','LightCoral','PaleVioletRed'],
-          fill: true}],}}
-          options={{
+          fill: true}]
+        }}
+          options={
+            {
               legend: { display: true },
               title: { display: true, text: `Top Star Per Language` },
-            }}
+              maintainAspectRatio: false
+            }
+          }
             />
 
       );
 
       const doughnutChart_star = (
         <Doughnut
-          width={size}
-          height={size}
+
           data={{
             labels: languagesArr.map(({language }) => language),
             datasets: [{
@@ -65,7 +64,8 @@ console.log(languagesArr)
               hoverBackgroundColor: 'Tomato',
               hoverBorderColor: 'Gray',
               backgroundColor: ['LightSteelBlue', 'PeachPuff','LemonChiffon','PowderBlue', 'LavenderBlush','Pink','LightGray','SandyBrown','PaleGoldenRod','LightCoral','PaleVioletRed'],
-              fill: true}],}}
+              fill: true}]
+            }}
               options={{
                   legend: { display: true },
                   title: { display: true, text: `Stars Count Per Language` },
@@ -76,8 +76,6 @@ console.log(languagesArr)
 
           const doughnutChart_fork = (
             <Doughnut
-              width={size}
-              height={size}
               data={{
                 labels: languagesArr.map(({language }) => language),
                 datasets: [{
@@ -88,6 +86,7 @@ console.log(languagesArr)
                   hoverBorderColor: 'Gray',
                   backgroundColor: ['LightSteelBlue', 'PeachPuff','LemonChiffon','PowderBlue', 'LavenderBlush','Pink','LightGray','SandyBrown','PaleGoldenRod','LightCoral','PaleVioletRed'],
                   fill: true}],}}
+
                   options={{
                       legend: { display: true },
                       title: { display: true, text: `Forks Count Per Language` },
@@ -98,12 +97,21 @@ console.log(languagesArr)
           return (
             console.log(l),
             console.log(languagesArr),
-            <div>
+            <Grid >
+              <Grid.Row>
+                <Grid.Column >
                 {barChart}
+                </Grid.Column>
+              </Grid.Row>
+              <Grid.Row columns={2}>
+                <Grid.Column mobile={12} tablet={8} computer={6}>
                 {doughnutChart_star }
+              </Grid.Column>
+                <Grid.Column mobile={12} tablet={8} computer={6}>>
                 {doughnutChart_fork }
-
-            </div>
+              </Grid.Column>
+              </Grid.Row>
+            </Grid>
 
           );
 }

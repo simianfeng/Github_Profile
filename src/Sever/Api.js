@@ -20,7 +20,7 @@ export const getData = async (username) => {
         followers,
         bio,
         avatar_url,
-      login }
+      login,public_repos }
       } = await axios.get(changeableUrl);
 
     return {name,
@@ -32,7 +32,7 @@ export const getData = async (username) => {
       followers,
       bio,
       avatar_url,
-    login };
+    login,public_repos };
   } catch (error) {
     return error;
   }
@@ -102,13 +102,12 @@ export const getSum=async (username)=>{
   var totalfork=0
   data.forEach(item => {
     totalstar+=item.stargazers_count|| 0
-    totalfork+=item.tem.forks|| 0
+    totalfork+=item.forks_count|| 0
   })
   return {totalstar,totalfork}
 }
 
-export const getTop=async (username)=>{
-}
+
 /*
 export const getCommit=async (username)=>{
   const  {data}=(await axios.get(`${url}/${username}/repos`));
