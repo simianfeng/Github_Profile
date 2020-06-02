@@ -51,14 +51,16 @@ export const getRepoData=async (username)=>{
         language,
         forks,
         size,
-        name})=>
+        name,
+      description})=>
     (
       {
         stargazers_count,
           language,
           forks,
           size,
-          name}));
+          name,
+        description}));
   }
    catch (error) {
     return error;

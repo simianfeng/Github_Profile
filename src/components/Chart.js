@@ -7,8 +7,8 @@ const Chart = () => {
   const username=useParams().username;
   const [languagesArr, setlanguagesArr] = useState([]);
   const [l, setl] = useState({});
-  const width=150
-  const height=350
+  const width=50
+  const height=400
   const size=120
   useEffect(() => {
     const fetchlanguages = async () => {
@@ -98,18 +98,19 @@ console.log(languagesArr)
             console.log(l),
             console.log(languagesArr),
             <Grid >
-              <Grid.Row>
+              <Grid.Row >
                 <Grid.Column >
                 {barChart}
                 </Grid.Column>
               </Grid.Row>
-              <Grid.Row columns={2}>
-                <Grid.Column mobile={12} tablet={8} computer={6}>
+
+              <Grid.Row centered columns={2}>
+                <Grid.Column mobile={16} tablet={8} computer={6}>
                 {doughnutChart_star }
-              </Grid.Column>
-                <Grid.Column mobile={12} tablet={8} computer={6}>>
+                </Grid.Column>
+                <Grid.Column mobile={16} tablet={8} computer={6}>
                 {doughnutChart_fork }
-              </Grid.Column>
+                </Grid.Column>
               </Grid.Row>
             </Grid>
 
