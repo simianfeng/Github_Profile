@@ -23,7 +23,7 @@ const Chart = () => {
         else if (a.count < b.count) return 1
         return 0
       })
-console.log(languagesArr)
+//console.log(languagesArr)
   const barChart = (
     <Bar
       width={width}
@@ -43,7 +43,7 @@ console.log(languagesArr)
           options={
             {
               legend: { display: true },
-              title: { display: true, text: `Top Star Per Language` },
+              title: { display: true, text: `Number of Repos Per Language` },
               maintainAspectRatio: false,
                responsive: true,
                layout: {
@@ -65,7 +65,7 @@ console.log(languagesArr)
                       yAxes: [{
                           ticks: { display: true },
                           gridLines: {
-                              display: false,
+                              display: true,
                               drawBorder: true
                           }
                       }]

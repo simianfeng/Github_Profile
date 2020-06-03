@@ -1,0 +1,27 @@
+.Sorting{
+  margin-top: 6em;
+  margin-bottom: 1.5em;
+  margin-left: 4em;
+  width: 90%;
+  align-items: center;
+  text-align: center;
+}
+.repo_sort{
+  text-align: center;
+  font-family: 'Mono';
+  color: #2F4F4F;
+  font-size: 2.5em;
+  font-weight: bold;
+}
+
+.form{
+  margin-top: 1em;
+  margin-bottom: 1.5em;
+}
+
+h3{
+  text-align: center;
+  font-size: 1.5em;
+  margin-left: 1em;
+  margin-right: 3em;
+}
