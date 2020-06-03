@@ -45,7 +45,32 @@ console.log(languagesArr)
             {
               legend: { display: true },
               title: { display: true, text: `Top Star Per Language` },
-              maintainAspectRatio: false
+              maintainAspectRatio: false,
+               responsive: true,
+               layout: {
+                  padding: {
+                      top: 5,
+                      left: 15,
+                      right: 15,
+                      bottom: 15
+                  }
+                },
+                scales: {
+                      xAxes: [{
+                          ticks: { display: false },
+                          gridLines: {
+                              display: false,
+                              drawBorder: false
+                          }
+                      }],
+                      yAxes: [{
+                          ticks: { display: true },
+                          gridLines: {
+                              display: false,
+                              drawBorder: true
+                          }
+                      }]
+                    }
             }
           }
             />
@@ -69,6 +94,15 @@ console.log(languagesArr)
               options={{
                   legend: { display: true },
                   title: { display: true, text: `Stars Count Per Language` },
+                  responsive: true,
+                  layout: {
+                     padding: {
+                         top: 5,
+                         left: 15,
+                         right: 15,
+                         bottom: 15
+                     }
+                   }
                 }}
 
               />
@@ -90,6 +124,15 @@ console.log(languagesArr)
                   options={{
                       legend: { display: true },
                       title: { display: true, text: `Forks Count Per Language` },
+                      responsive: true,
+                      layout: {
+                         padding: {
+                             top: 5,
+                             left: 15,
+                             right: 15,
+                             bottom: 15
+                         }
+                       }
                     }}
 
                   />
