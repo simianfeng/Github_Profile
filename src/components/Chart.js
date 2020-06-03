@@ -8,7 +8,7 @@ const Chart = () => {
   const [languagesArr, setlanguagesArr] = useState([]);
   const [l, setl] = useState({});
   const width=50
-  const height=400
+  const height=300
   const size=120
   useEffect(() => {
     const fetchlanguages = async () => {
@@ -18,7 +18,6 @@ const Chart = () => {
 
   }, []);
 
-  const sortProperty = 'stars';
   languagesArr.sort((a, b) => {
         if (a.count > b.count) return -1
         else if (a.count < b.count) return 1
@@ -148,10 +147,10 @@ console.log(languagesArr)
               </Grid.Row>
 
               <Grid.Row centered columns={2}>
-                <Grid.Column mobile={16} tablet={8} computer={6}>
+                <Grid.Column mobile={16} tablet={8} computer={8}>
                 {doughnutChart_star }
                 </Grid.Column>
-                <Grid.Column mobile={16} tablet={8} computer={6}>
+                <Grid.Column mobile={16} tablet={8} computer={8}>
                 {doughnutChart_fork }
                 </Grid.Column>
               </Grid.Row>
