@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getLanguageData } from '../Sever/Api';
-import { Line, Bar,Doughnut } from 'react-chartjs-2';
+import { Bar,Doughnut } from 'react-chartjs-2';
 import { useParams } from "react-router-dom";
 import { Grid,Card} from 'semantic-ui-react';
 const Chart = () => {
@@ -43,7 +43,13 @@ const Chart = () => {
           options={
             {
               legend: { display: true },
-              title: { display: true, text: `Number of Repos Per Language` },
+              title: {
+                display: true,
+                text: `Number of Repos Per Language` ,
+                fontSize: 15,
+                fontFamily: 'Mono',
+                fontColor: '#2F4F4F'
+              },
               maintainAspectRatio: false,
                responsive: true,
                layout: {
@@ -53,23 +59,7 @@ const Chart = () => {
                       right: 15,
                       bottom: 15
                   }
-                },
-                scales: {
-                      xAxes: [{
-                          ticks: { display: false },
-                          gridLines: {
-                              display: false,
-                              drawBorder: false
-                          }
-                      }],
-                      yAxes: [{
-                          ticks: { display: true },
-                          gridLines: {
-                              display: true,
-                              drawBorder: true
-                          }
-                      }]
-                    }
+                }
             }
           }
             />
@@ -85,7 +75,7 @@ const Chart = () => {
               data: languagesArr.map(({stars }) => stars),
               label: 'language',
               borderColor: 'Gray',
-              hoverBackgroundColor: 'Tomato',
+              hoverBackgroundColor: 'Gray',
               hoverBorderColor: 'Gray',
               backgroundColor: ['LightSteelBlue', 'PeachPuff','LemonChiffon','PowderBlue', 'LavenderBlush','Pink','LightGray','SandyBrown','PaleGoldenRod','LightCoral','PaleVioletRed'],
               fill: true}]
@@ -115,7 +105,7 @@ const Chart = () => {
                   data: languagesArr.map(({forks }) => forks),
                   label: 'language',
                   borderColor: 'Gray',
-                  hoverBackgroundColor: 'LightPink',
+                  hoverBackgroundColor: 'Gray',
                   hoverBorderColor: 'Gray',
                   backgroundColor: ['LightSteelBlue', 'PeachPuff','LemonChiffon','PowderBlue', 'LavenderBlush','Pink','LightGray','SandyBrown','PaleGoldenRod','LightCoral','PaleVioletRed'],
                   fill: true}],}}
