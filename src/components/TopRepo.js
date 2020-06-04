@@ -36,7 +36,7 @@ const TopRepo = () => {
         }
       )
     const handleChange = e => setType(e.target.value);
-
+    const LIMIT=6
     return(
       <div class="Sorting">
       <label className='repo_sort'>Top Repo Sorting</label>
@@ -51,7 +51,7 @@ const TopRepo = () => {
 
 
       <Card.Group centered itemsPerRow={3}>
-      {repoData.map(repo => (
+      {repoData.slice(0,LIMIT).map(repo => (
           <Card>
           <Card.Content header={repo.name} />
           <Card.Content description={repo.description} />

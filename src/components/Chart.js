@@ -23,6 +23,7 @@ const Chart = () => {
         else if (a.count < b.count) return 1
         return 0
       })
+  
 //console.log(languagesArr)
   const barChart = (
     <Bar

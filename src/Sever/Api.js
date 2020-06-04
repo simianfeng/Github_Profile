@@ -19,7 +19,7 @@ export const getData = async (username) => {
         email,
         followers,
         bio,
-        avatar_url,
+        avatar_url,url,
       login,public_repos }
       } = await axios.get(changeableUrl);
 
@@ -31,7 +31,7 @@ export const getData = async (username) => {
       email,
       followers,
       bio,
-      avatar_url,
+      avatar_url,url,
     login,public_repos };
   } catch (error) {
     return error;
@@ -65,6 +65,15 @@ export const getRepoData=async (username)=>{
    catch (error) {
     return error;
   }
+}
+
+export const getRepoName=async (username)=>{
+  const { data }=await axios.get(`${url}/${username}/repos`);
+  const name=[]
+  data.forEach(item => {
+    name.push(item.name);
+  })
+  return name
 }
 
 export const getLanguageData=async (username)=>{
@@ -108,8 +117,25 @@ export const getSum=async (username)=>{
   })
   return {totalstar,totalfork}
 }
+/*
+export const getCommit=async (username,reponame)=>{
+  let changeableUrl =`https://api.github.com/repos/${username}/${reponame}/stats/commit_activity`;
+  const commits_total=[]
+  var total=0
 
-
+  try {
+    const { data }=await axios.get(changeableUrl);
+    console.log(data)
+    data.forEach(item => {
+      total+=item.total
+    }
+  )
+    return total
+  }
+   catch (error) {
+    return error;
+  }
+}
 /*
 export const getCommit=async (username)=>{
   const  {data}=(await axios.get(`${url}/${username}/repos`));
