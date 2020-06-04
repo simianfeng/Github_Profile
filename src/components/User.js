@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { getData,getRepoData,getLanguageData,getSum } from '../Sever/Api';
+import { getData,getSum } from '../Sever/Api';
 import { useParams } from 'react-router-dom';
-import {  Icon, Image,Card} from 'semantic-ui-react';
+import { Card} from 'semantic-ui-react';
 import './User.css';
 
 const User = () => {
@@ -85,9 +85,20 @@ const User = () => {
             {userData.company}
           </h3>
         }
-
-
-</div>
+        {userData.created_at &&
+          <h3>
+          <i aria-hidden="true" class="calendar alternate outline icon"></i>
+            Joined{' '}
+              {new Date(userData.created_at).toLocaleDateString('en-US', {
+                month: 'long',
+                day: 'numeric',
+                year: 'numeric',
+              }
+            )
+            }
+          </h3>
+        }
+      </div>
       <Card.Group centered  items={items}  />
       </div>
   );

@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { getLanguageData } from '../Sever/Api';
-import { Line, Bar,Doughnut, Divider, Image, Segment } from 'react-chartjs-2';
+import { Line, Bar,Doughnut } from 'react-chartjs-2';
 import { useParams } from "react-router-dom";
 import { Grid,Card} from 'semantic-ui-react';
 const Chart = () => {
   const username=useParams().username;
   const [languagesArr, setlanguagesArr] = useState([]);
-  const [l, setl] = useState({});
   const width=50
   const height=300
   const size=120
@@ -23,7 +22,7 @@ const Chart = () => {
         else if (a.count < b.count) return 1
         return 0
       })
-  
+
 //console.log(languagesArr)
   const barChart = (
     <Bar
@@ -138,8 +137,7 @@ const Chart = () => {
                   />
               );
           return (
-            console.log(l),
-            console.log(languagesArr),
+          //  console.log(languagesArr),
             <Grid >
               <Grid.Row >
                 <Grid.Column >
