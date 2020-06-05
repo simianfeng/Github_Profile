@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { getLanguageData } from '../Sever/Api';
-import { Bar,Doughnut } from 'react-chartjs-2';
+import {Doughnut,Polar} from 'react-chartjs-2';
 import { useParams } from "react-router-dom";
 import { Grid,Card} from 'semantic-ui-react';
 const Chart = () => {
   const username=useParams().username;
   const [languagesArr, setlanguagesArr] = useState([]);
   const width=50
-  const height=300
+  const height=350
   const size=120
   useEffect(() => {
     const fetchlanguages = async () => {
@@ -17,22 +17,15 @@ const Chart = () => {
 
   }, []);
 
-  languagesArr.sort((a, b) => {
-        if (a.count > b.count) return -1
-        else if (a.count < b.count) return 1
-        return 0
-      })
-
-//console.log(languagesArr)
-  const barChart = (
-    <Bar
+  const PolarChart = (
+    <Polar
       width={width}
       height={height}
       data={{
         labels: languagesArr.map(({language }) => language),
         datasets: [{
           data: languagesArr.map(({count}) => count),
-          label: 'Star',
+          label: 'Lanuage',
           borderColor: 'Gray',
           hoverBackgroundColor: 'white',
           hoverBorderColor: 'Gray',
@@ -46,7 +39,7 @@ const Chart = () => {
               title: {
                 display: true,
                 text: `Number of Repos Per Language` ,
-                fontSize: 15,
+                fontSize: 20,
                 fontFamily: 'Mono',
                 fontColor: '#2F4F4F'
               },
@@ -54,7 +47,7 @@ const Chart = () => {
                responsive: true,
                layout: {
                   padding: {
-                      top: 5,
+                      top: 34,
                       left: 15,
                       right: 15,
                       bottom: 15
@@ -68,7 +61,8 @@ const Chart = () => {
 
       const doughnutChart_star = (
         <Doughnut
-
+          width={width}
+          height={height}
           data={{
             labels: languagesArr.map(({language }) => language),
             datasets: [{
@@ -80,13 +74,22 @@ const Chart = () => {
               backgroundColor: ['LightSteelBlue', 'PeachPuff','LemonChiffon','PowderBlue', 'LavenderBlush','Pink','LightGray','SandyBrown','PaleGoldenRod','LightCoral','PaleVioletRed'],
               fill: true}]
             }}
+
               options={{
-                  legend: { display: true },
-                  title: { display: true, text: `Stars Count Per Language` },
+                  legend: {
+                    display: true,
+                    position:'bottom'
+                  },
+                  title: { display: true,
+                    text: `Stars Count Per Language`,
+                    fontSize: 20,
+                    fontFamily: 'Mono',
+                    fontColor: '#2F4F4F' },
                   responsive: true,
+                  maintainAspectRatio: false,
                   layout: {
                      padding: {
-                         top: 5,
+                         top: 34,
                          left: 15,
                          right: 15,
                          bottom: 15
@@ -99,6 +102,8 @@ const Chart = () => {
 
           const doughnutChart_fork = (
             <Doughnut
+              width={width}
+              height={height}
               data={{
                 labels: languagesArr.map(({language }) => language),
                 datasets: [{
@@ -111,12 +116,17 @@ const Chart = () => {
                   fill: true}],}}
 
                   options={{
-                      legend: { display: true },
-                      title: { display: true, text: `Forks Count Per Language` },
+                      legend: { display: true,position:'bottom'  },
+                      title: { display: true,
+                        text: `Forks Count Per Language`,
+                        fontSize: 20,
+                        fontFamily: 'Mono',
+                        fontColor: '#2F4F4F' },
                       responsive: true,
+                      maintainAspectRatio: false,
                       layout: {
                          padding: {
-                             top: 5,
+                             top: 34,
                              left: 15,
                              right: 15,
                              bottom: 15
@@ -127,19 +137,19 @@ const Chart = () => {
                   />
               );
           return (
-          //  console.log(languagesArr),
+           //console.log(languagesArr),
             <Grid >
               <Grid.Row >
                 <Grid.Column >
-                {barChart}
+                {PolarChart}
                 </Grid.Column>
               </Grid.Row>
 
               <Grid.Row centered columns={2}>
-                <Grid.Column mobile={16} tablet={8} computer={8}>
+                <Grid.Column mobile={16} tablet={8} computer={5}>
                 {doughnutChart_star }
                 </Grid.Column>
-                <Grid.Column mobile={16} tablet={8} computer={8}>
+                <Grid.Column mobile={16} tablet={8} computer={5}>
                 {doughnutChart_fork }
                 </Grid.Column>
               </Grid.Row>

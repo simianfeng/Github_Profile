@@ -8,7 +8,7 @@ const Main = props => {
   return (
     <div className='style'>
       <User />
-      <Commit />
+      
       <Chart />
       <TopRepo />
     </div>

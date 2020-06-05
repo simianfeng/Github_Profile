@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getRepoData,getCommit,getRepoName} from '../Sever/Api';
 import { useParams } from "react-router-dom";
-import { Line } from 'react-chartjs-2';
+import { Line,Bar } from 'react-chartjs-2';
 import axios from 'axios';
 
 const Commit = () => {
@@ -41,35 +41,35 @@ const Commit = () => {
 var q=0
 for (q=0;q<52;q++)
 {
-  activate.push(0)
+  activate.push(0);
 }
-const filesPromise = Promise.all(requests).then((results) => {
-for (let i in results )
-{
-  const a=results[i]
-  for(let j in a)
-  {
-    activate[j]+=a[j]
-    //console.log(activate[j])
-    total+=activate[j]
-  }
-}
-//console.log(activate)
-//total_commit.push(JSON.stringify(results));
-return JSON.stringify(results)
-});
-//console.log(filesPromise);
-console.log(activate)
-//console.log(total_commit);
-//console.log(total);
 
-/*
+const filesPromise = Promise.all(requests).then((results) => {
+//total_commit.push(JSON.stringify(results));
+return results
+});
+useEffect(() => {
+filesPromise.then((results)=>
+    {for (let i in results )
+    {
+      const a=results[i]
+      for(let j in a)
+      {
+        activate[j]+=a[j]
+      }
+    }
+    setCommit(activate)
+    }
+    )
+    })
+
+
 const lineChart = (
   <Line
     data={{
-      //labels: activate.map(({language }) => language),
+      labels: userCommit,
       datasets: [{
-        data: activate,
+        data:  userCommit,
         label: 'Contributions',
         borderColor: 'Gray',
         hoverBackgroundColor: 'white',
@@ -103,12 +103,10 @@ const lineChart = (
           />
 
     );
-*/
+
   return(
     <div>
-    
-      {total_commit}
-      {total}
+    {lineChart}
     </div>
   )
 }
