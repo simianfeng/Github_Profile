@@ -39,7 +39,7 @@ const TopRepo = () => {
     const LIMIT=9
     return(
       <div class="Sorting">
-      <label className='repo_sort'>Top 9 Projects Sorting By </label>
+      <label className='repo_sort'>Top Projects Sorting By </label>
       <form className="form">
           <input type="radio" name="Stars " label="Stars" checked={type === 'stargazers_count'} value='stargazers_count' onClick={() => setType('stargazers_count')} />
           <h3> Stars </h3>
