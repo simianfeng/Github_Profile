@@ -1,6 +1,8 @@
 # Github_Profile
 
 ### This project is to is to display user's GitHub information in nice format.
+### Live at [Live_Demo](https://leij11.netlify.app/)
+
 Inspired by [tipsy](https://github.com/tipsy/profile-summary-for-github)
 
 ![alt text](https://github.com/leij11/Github_Profile/blob/new/Assets/screenshoot1.png?raw=true)
@@ -30,5 +32,5 @@ npm build
 
 ### Run
 ```
-npm run start
+npm start
 ```
