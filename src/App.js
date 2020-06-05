@@ -13,8 +13,8 @@ const App =()=> {
     return (
        <Router>
          <Switch>
-               <Route path='/main' component={Main} />
-               <Route path='/:username/profile' component={Main} />
+               <Route path={process.env.PUBLIC_URL +'/main'} component={Main} />
+               <Route path={'/:username/profile'} component={Main} />
                <Route path='/' component={UserInput} />
               </Switch>
       </Router>
